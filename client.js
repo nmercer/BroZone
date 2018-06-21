@@ -85,12 +85,12 @@ function runCmd(cmd){
 }
 
 function servoDown(){
-  runCmd("python down.py")
+  runCmd("sudo python down-test.py")
 
 }
 
 function servoUp(){
-  runCmd("python up.py")
+  runCmd("sudo python up-test.py")
 }
 
 log(`FULL URL ${fullUrl}`);
