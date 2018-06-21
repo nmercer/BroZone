@@ -126,15 +126,19 @@ client.on('assets', (data) => {
 
 client.on('zone_update', (data) => {
   console.log(data["action"]);
-
+  var tag_id = "A0E6F8380F38";
   logEvent('asset_update', data);
+  
+  if(data["tag_id"] != tag_id){
+    return;
+  }
   if(data["action"] === 'enter'){
     servoUp()
-
   }
   else if (data["action"] === 'exit') {
     servoDown()
   }
+
 });
 
 
