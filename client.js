@@ -125,13 +125,13 @@ client.on('assets', (data) => {
 });
 
 client.on('zone_update', (data) => {
-  console.log(data["action"]);
-  var tag_id = "A0E6F8380F38";
+  console.log(data);
   logEvent('asset_update', data);
-  
-  if(data["tag_id"] != tag_id){
+
+  if(program.mac && data["tag_id"] != program.mac){
     return;
   }
+
   if(data["action"] === 'enter'){
     servoUp()
   }
@@ -172,9 +172,7 @@ function getSubscriptions(program) {
   if (program.labelID) {
     subscribeData.push({labelID: program.labelID, locationID: program.locationID});
   }
-  if (program.mac) {
-    subscribeData.push({mac: program.mac, locationID: program.locationID});
-  }
+
   if (program.areaZoneID) {
     subscribeData.push({areaZoneID: program.areaZoneID, locationID: program.locationID});
   }
