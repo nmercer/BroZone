@@ -1,0 +1,24 @@
+{
+  "name": "brozone",
+  "version": "1.0.0",
+  "description": "BroZone Hackathon",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmercer/BroZone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nmercer/BroZone/issues"
+  },
+  "homepage": "https://github.com/nmercer/BroZone#readme",
+  "dependencies": {
+    "colors": "^1.3.0",
+    "commander": "^2.15.1",
+    "socket.io-client": "^2.1.1"
+  }
+}
