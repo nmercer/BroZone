@@ -4,8 +4,8 @@
 const socket_client = require('socket.io-client');
 const program = require('commander');
 const colors = require('colors');
-const Gpio = require('pigpio').Gpio;
-const motor = new Gpio(10, {mode: Gpio.OUTPUT});
+const sys = require('sys')
+const exec = require('child_process').exec;
 
 
 process.env['DEBUG'] = '*';
@@ -70,6 +70,29 @@ log(`Namespace: ${program.namespace}`);
 
 let fullUrl =  program.namespace !== null ? `${serverURL}/${program.namespace}` : `${serverURL}`;
 
+function runCmd(cmd){
+
+  bashCmd = exec(cmd, function(err, stdout, stderr) {
+    if (err) {
+      console.console.log(err);
+    }
+    console.log(stdout);
+  });
+
+  bashCmd.on('exit', function (code) {
+  });
+
+}
+
+function servoDown(){
+  runCmd("python down.py")
+
+}
+
+function servoUp(){
+  runCmd("python up.py")
+}
+
 log(`FULL URL ${fullUrl}`);
 const client = socket_client.connect(fullUrl, {path: path});
 
@@ -102,13 +125,15 @@ client.on('assets', (data) => {
 });
 
 client.on('zone_update', (data) => {
+  console.log(data["action"]);
+
   logEvent('asset_update', data);
   if(data["action"] === 'enter'){
-    motor.servoWrite(100)
+    servoUp()
 
   }
   else if (data["action"] === 'exit') {
-    motor.servoWrite(-100)
+    servoDown()
   }
 });
 
